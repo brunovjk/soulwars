@@ -4,6 +4,7 @@ out = 'out'
 libs = ['lib']
 remappings = [
     '@thirdweb-dev/=node_modules/@thirdweb-dev/',
+    'base64-sol/=node_modules/base64-sol/',
 ]
 
 

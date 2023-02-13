@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "soulwars",
+    "public": "Build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

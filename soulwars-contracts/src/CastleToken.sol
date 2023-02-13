@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@thirdweb-dev/contracts/base/ERC721Base.sol";
+import "base64-sol/base64.sol";
 
 contract CastleToken is ERC721Base {
     // Mapping to store the tokens owned by each user
@@ -24,6 +25,7 @@ contract CastleToken is ERC721Base {
     function checkInput(string memory _tokenURI) public pure returns (bool) {
         bytes32 hash = keccak256(bytes(_tokenURI));
         return
+            hash == keccak256(bytes("0")) ||
             hash == keccak256(bytes("1")) ||
             hash == keccak256(bytes("2")) ||
             hash == keccak256(bytes("3")) ||
@@ -31,13 +33,46 @@ contract CastleToken is ERC721Base {
     }
 
     /**
+     * Formats the token URI for a Castle Token
+     *
+     * @param wizardMaterial - the new token URI
+     * @return - The formatted token URI as a string
+     */
+    function formatTokenURI(string memory wizardMaterial)
+        public
+        pure
+        returns (string memory)
+    {
+        // Encoding the metadata into a JSON string
+        return
+            string(
+                abi.encodePacked(
+                    // Specifying the format of the encoded data
+                    "data:application/json;base64,",
+                    Base64.encode(
+                        bytes(
+                            abi.encodePacked(
+                                '{ "name":"YouCastleToken", "description":"Store progress in SoulWars game", "attributes": { "image": "https://ipfs.io/ipfs/QmT6iN5PrQes13TRnM3YhtFE1heUoxVa67Jsj7Gm93JWLT?filename=wizard.png", "WizardMaterial":"',
+                                wizardMaterial,
+                                '" }'
+                            )
+                        )
+                    )
+                )
+            );
+    }
+
+    /**
      * Set the token URI for a specific token ID
      * @param _tokenId - the ID of the token
      * @param _tokenURI - the new token URI
      */
-    function setNewTokenURI(uint256 _tokenId, string memory _tokenURI) public {
+    function _setTokenURI(uint256 _tokenId, string memory _tokenURI)
+        internal
+        override
+    {
         require(checkInput(_tokenURI), "Token URI not valid");
-        _setTokenURI(_tokenId, _tokenURI);
+        fullURI[_tokenId] = formatTokenURI(_tokenURI);
     }
 
     /**
