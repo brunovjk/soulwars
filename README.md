@@ -1,9 +1,5 @@
 # SoulWars
 
-ProfileToken - Mumbai testnet - 0x062a6f76c5A1078709127D7cfd4D86D2eadA7131
-
-CastleToken - Mumbai testnet - 0x1E9604BbD5B55B1Aca4f6EDBCCaf074013C34D0d
-
 Introduction:
 SoulWars is a web3 browser-based game where players are tasked with protecting their castles from invaders and acquiring resources to strengthen their castles. The game utilizes Non-Fungible Tokens (NFTs) to keep track of the player's progress and allows them to access their castles from anywhere in the world.
 
