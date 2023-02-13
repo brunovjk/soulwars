@@ -1,6 +1,7 @@
 # SoulWars
 
 ProfileToken - Mumbai testnet - 0x062a6f76c5A1078709127D7cfd4D86D2eadA7131
+
 CastleToken - Mumbai testnet - 0x1E9604BbD5B55B1Aca4f6EDBCCaf074013C34D0d
 
 Introduction:
