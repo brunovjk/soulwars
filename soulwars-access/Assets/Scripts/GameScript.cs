@@ -52,7 +52,6 @@ public class GameScript : MonoBehaviour
             await UpdateWizardClothes(ChooseScript.choosenTokenId, chosenMaterial.ToString());
             chosenMaterial = 0;
         }
-        resultText.text = "Change Wizard`s Clothes";
     }
 
     public async void OnClickQuit()
@@ -96,14 +95,19 @@ public class GameScript : MonoBehaviour
         try
         {
             await contract.Write("setNewTokenURI", _tokenId, _newURI);
-            resultText.text = "Nice clothes.... for a clown.";
-        }
+            IEnumerator ChangeTextAfterDelay(float delay)
+            {
+                yield return new WaitForSeconds(delay);
+                resultText.text = "Change Wizard's Clothes";
+            }
+
+            StartCoroutine(ChangeTextAfterDelay(3f));
+            resultText.text = "Nice clothes...... for the Jester";        
+            }
             catch (System.Exception e)
         {
             resultText.text = "Failed to change clothes";
             Debug.Log("Failed to Burn: " + e.Message);
         }
-
-
     }
 }
